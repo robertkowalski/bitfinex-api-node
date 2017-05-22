@@ -17,7 +17,7 @@ describe('WebSocket v1 integration', () => {
       port: PORT
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -43,7 +43,7 @@ describe('WebSocket v1 integration', () => {
       port: PORT
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -70,7 +70,7 @@ describe('WebSocket v1 integration', () => {
       port: PORT
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -97,7 +97,7 @@ describe('WebSocket v1 integration', () => {
       port: PORT
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -135,7 +135,7 @@ describe('WebSocket v1 integration', () => {
       port: PORT
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -169,7 +169,7 @@ describe('WebSocket v1 integration', () => {
       })
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -201,7 +201,7 @@ describe('WebSocket v1 integration', () => {
       })
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 
@@ -255,7 +255,7 @@ describe('WebSocket v1 integration', () => {
       })
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 1, transform: true, autoOpen: false }).ws()
     bws.WebSocketURI = `ws://localhost:${PORT}`
     bws.open()
 

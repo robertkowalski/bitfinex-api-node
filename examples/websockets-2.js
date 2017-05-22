@@ -10,7 +10,7 @@ const API_SECRET = null
 
 const opts = { version: 2 }
 
-const bws = new BFX(API_KEY, API_SECRET, opts).ws
+const bws = new BFX(API_KEY, API_SECRET, opts).ws()
 
 bws.on('open', () => {
   bws.subscribeTrades('BTCUSD')

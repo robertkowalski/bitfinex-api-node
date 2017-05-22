@@ -9,13 +9,6 @@ const t = require('./lib/transformer.js')
 
 class BFX {
   constructor (apiKey, apiSecret, opts = { version: 1, transform: false }) {
-    this.apiKey = apiKey
-    this.apiSecret = apiSecret
-
-    if (opts.autoOpen !== false) {
-      opts.autoOpen = true
-    }
-
     if (typeof opts === 'number') {
       const msg = [
         'constructor takes an object since version 1.0.0, see:',
@@ -23,6 +16,17 @@ class BFX {
         ''
       ].join('\n')
       throw new Error(msg)
+    }
+
+    this.apiKey = apiKey
+    this.apiSecret = apiSecret
+    this.wsConnection = false
+
+    this.version = opts.version
+
+    this.autoOpen = false
+    if (opts.autoOpen !== false) {
+      this.autoOpen = true
     }
 
     let transformer = function passThrough (d) { return d }
@@ -34,16 +38,35 @@ class BFX {
       transformer = opts.transform
     }
 
-    if (opts.version === 2) {
-      this.rest = new REST2(this.apiKey, this.apiSecret, { transformer: transformer })
-      this.ws = new WS2(this.apiKey, this.apiSecret, { transformer: transformer })
-      opts.autoOpen && this.ws.open()
-      return
+    this.transformer = transformer
+
+    return this
+  }
+
+  ws () {
+    if (this.wsConnection) throw new Error('Websocket already set up. Use open/close methods.')
+
+    if (this.version === 2) {
+      this.ws = new WS2(this.apiKey, this.apiSecret, { transformer: this.transformer })
+      this.autoOpen && this.ws.open()
+      this.wsConnection = true
+      return this.ws
+    }
+
+    this.ws = new WS(this.apiKey, this.apiSecret)
+    this.autoOpen && this.ws.open()
+    this.wsConnection = true
+    return this.ws
+  }
+
+  http () {
+    if (this.version === 2) {
+      this.rest = new REST2(this.apiKey, this.apiSecret, { transformer: this.transformer })
+      return this.rest
     }
 
     this.rest = new REST(this.apiKey, this.apiSecret)
-    this.ws = new WS(this.apiKey, this.apiSecret)
-    opts.autoOpen && this.ws.open()
+    return this.rest
   }
 }
 

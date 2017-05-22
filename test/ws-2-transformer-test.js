@@ -17,7 +17,7 @@ describe('ws-2-transforms', () => {
       port: PORT
     })
 
-    const bws = new BFX('dummy', 'dummy', { version: 2, transform: true, autoOpen: false }).ws
+    const bws = new BFX('dummy', 'dummy', { version: 2, transform: true, autoOpen: false }).ws()
 
     bws.websocketURI = `ws://localhost:${PORT}`
     bws.open()

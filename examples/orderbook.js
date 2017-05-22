@@ -7,7 +7,7 @@ const BFX = require('../')
 const API_KEY = 'secret'
 const API_SECRET = 'secret'
 const opts = { version: 2, transform: true }
-const bws = new BFX(API_KEY, API_SECRET, opts).ws
+const bws = new BFX(API_KEY, API_SECRET, opts).ws()
 
 // ES 6 Map would be also possible
 const orderbook = {

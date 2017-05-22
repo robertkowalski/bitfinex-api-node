@@ -1,6 +1,7 @@
-const BitfinexWS = require('bitfinex-api-node')
+const BFX = require('bitfinex-api-node')
+// const BFX = require ('../')
 
-const bws = new BitfinexWS().ws
+const bws = new BFX().ws()
 
 bws.on('open', () => {
   bws.subscribeTrades('BTCUSD')

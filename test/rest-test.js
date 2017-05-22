@@ -8,7 +8,7 @@ const ws_test = require('./ws-test')
 
 describe('Errors', function () {
   const bfx = new BFX()
-  const bfx_rest = bfx.rest
+  const bfx_rest = bfx.http()
   this.timeout(5000)
   it('should error out if a bad endpoint is given', () => {
     expect(bfx_rest.make_public_request).to.throw(Error)
@@ -19,7 +19,7 @@ describe('Errors', function () {
 })
 describe('Public Endpoints', function () {
   const bfx = new BFX()
-  const bfx_rest = bfx.rest
+  const bfx_rest = bfx.http()
   this.timeout(5000)
   it('should get a ticker', (done) => {
     bfx_rest.ticker('BTCUSD', (error, data) => {

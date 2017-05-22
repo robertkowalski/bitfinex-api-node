@@ -31,8 +31,10 @@ const opts = {
   transform: true
 }
 
-const bws = new BFX(API_KEY, API_SECRET, opts).ws
+// set up websocket connection
+const bws = new BFX(API_KEY, API_SECRET, opts).ws()
 
+// subscribe to channels
 bws.on('open', () => {
   bws.subscribeTicker('BTCUSD')
   bws.subscribeOrderBook('BTCUSD')
@@ -67,6 +69,14 @@ const opts = {
 }
 ```
 
+This exposes two methods: `http` and `ws`. They are used to connect with each protocol:
+
+```js
+const bws = new BFX(API_KEY, API_SECRET, opts).ws()
+
+const bhttp = new BFX(API_KEY, API_SECRET, opts).http()
+```
+
 ## Version 1.0.0 Breaking changes:
 
 ### constructor takes an options object now, instead of version number:
@@ -84,13 +94,36 @@ new BFX(API_KEY, API_SECRET, { version: 2 })
 ```
 **Note** version must be of type `Number`.
 
+
 ### `trade` and `orderbook` snapshots are emitted as nested lists
 
 To make dealing with snapshots better predictable, snapshots are emitted as an array.
 
+
 ### normalized orderbooks for R0
 
 Lists of raw orderbooks (`R0`) are ordered in the same order as `P0`, `P1`, `P2`, `P3`
+
+
+### constructor exposes `ws()` and `http()` method to connect
+
+`new BFX` will now **not** open a websocket connection even if you just use http.
+
+Old:
+
+```js
+const bhttp = new BFX(API_KEY, API_SECRET, 2).http
+const bws = new BFX(API_KEY, API_SECRET, 2).ws
+
+```
+
+since 1.0.0:
+
+```js
+const bhttp = new BFX(API_KEY, API_SECRET, 2).http()
+const bws = new BFX(API_KEY, API_SECRET, { version: 2 }).ws()
+
+```
 
 
 ## Tests
@@ -101,10 +134,8 @@ npm test
 
 ## Contributing
 
-```
 We are following the [standard JavaScript Style Guide](https://github.com/feross/standard).
 Add unit tests for any new or changed functionality. Lint and test your code.
-```
 
 ## Release History
 ```

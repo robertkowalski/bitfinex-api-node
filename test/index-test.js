@@ -42,9 +42,8 @@ describe('BFX', () => {
       1726.3 ]`
 
     it('supports http', (done) => {
-      const bfx = new BFX('dummy', 'dummy', { version: 2, autoOpen: false })
+      const bhttp = new BFX('dummy', 'dummy', { version: 2, autoOpen: false }).http()
 
-      const bhttp = bfx.rest
       bhttp.url = `http://localhost:${PORT}`
 
       const server = http.createServer((req, res) => {
@@ -68,10 +67,9 @@ describe('BFX', () => {
       })
     })
 
-    it('supports transforming', (done) => {
-      const bfx = new BFX('dummy', 'dummy', { version: 2, transform: true, autoOpen: false })
+    it('supports transforming with http', (done) => {
+      const bhttp = new BFX('dummy', 'dummy', { version: 2, transform: true, autoOpen: false }).http()
 
-      const bhttp = bfx.rest
       bhttp.url = `http://localhost:${PORT}`
 
       const server = http.createServer((req, res) => {
@@ -109,7 +107,7 @@ describe('BFX', () => {
     it('ws: supports custom transforms', (done) => {
       const t = function (data) { return data.map((el) => { return el + 'f' }) }
 
-      const bws = new BFX('dummy', 'dummy', { version: 2, transform: t, autoOpen: false }).ws
+      const bws = new BFX('dummy', 'dummy', { version: 2, transform: t, autoOpen: false }).ws()
 
       bws.websocketURI = `ws://localhost:${PORT}`
       bws.open()
@@ -153,7 +151,7 @@ describe('BFX', () => {
     })
 
     it('ws: it transforms with default transformer', (done) => {
-      const bws = new BFX('dummy', 'dummy', { version: 2, transform: true, autoOpen: false }).ws
+      const bws = new BFX('dummy', 'dummy', { version: 2, transform: true, autoOpen: false }).ws()
 
       bws.websocketURI = `ws://localhost:${PORT}`
       bws.open()
@@ -197,7 +195,7 @@ describe('BFX', () => {
     })
 
     it('ws: can handle responses without transforms', (done) => {
-      const bws = new BFX('dummy', 'dummy', { version: 2, autoOpen: false }).ws
+      const bws = new BFX('dummy', 'dummy', { version: 2, autoOpen: false }).ws()
 
       bws.websocketURI = `ws://localhost:${PORT}`
       bws.open()
